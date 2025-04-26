@@ -39,19 +39,7 @@ significant_genes.csv: Exported list of significant DEGs (adjusted p-value < 0.0
 
 DEG_list_for_STRING.csv: List of DEGs with log2 fold change values for network analysis.
 
-functional_enrichment_results.csv: Results from Gene Ontology (GO) enrichment analysis.
-
-visualizations: Folder containing the generated plots (volcano plot, bar plot, scatter plot, GO enrichment plots).
-Visualizations
-The following visualizations are included:
-
-Volcano Plot
-
-Bar Plot
-
-Scatter Plot
-
-GO Enrichment Bar and Dot Plot
+visualizations: Folder containing the generated plots.
 # Conclusion
 This analysis identifies key genes that are differentially expressed between tumor and normal samples and provides insights into the biological processes these genes are involved in. Functional enrichment analysis points to significant pathways related to cytoskeleton regulation, immune response, and glial differentiation, which may have implications in cancer research.
 # References
