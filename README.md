@@ -23,7 +23,15 @@ Network Analysis: Identify key gene-gene interactions using Cytoscape and STRING
 # Data Description
 The data used in this analysis consists of RNA-Seq expression levels of genes across tumor and normal samples. The data was processed to obtain log2 fold changes and adjusted p-values for each gene. The significant DEGs (adjusted p-value < 0.05) were further analyzed for functional enrichment and gene-gene interactions.
 # Code Files
+data_loading.R: Script for importing and inspecting the GEO dataset.
 
+data_preprocessing.R: Script for preprocessing microarray data, including normalization and annotation.
+
+differential_expression_analysis.R: Performs differential expression analysis using limma.
+
+gene_enrichment_analysis.R: Conducts GO/KEGG enrichment using clusterProfiler.
+
+network_analysis.R: Prepares input for STRING and Cytoscape to analyze DEG networks.
 # Key Files
 DEGs.csv: A list of differentially expressed genes (DEGs) between tumor and normal samples.
 
