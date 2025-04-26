@@ -23,3 +23,22 @@ write.csv(top_genes, "results/top_differentially_expressed_genes.csv")
 
 # View results
 head(top_genes)
+library(ggplot2)
+# Volcano plot code
+ggplot(top_genes, aes(x = logFC, y = -log10(adj.P.Val), color = Significance)) +
+  geom_point(alpha = 0.8, size = 2) +
+  scale_color_manual(values = c("red", "gray")) +
+  theme_minimal() +
+  ggtitle("Volcano Plot: Tumor vs Normal") +
+  xlab("Log2 Fold Change") +
+  ylab("-Log10 Adjusted p-value")
+ggsave("figures/volcano_plot.png")
+ggplot(top_genes_filtered, aes(x = reorder(Gene, logFC), y = logFC)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  coord_flip() +
+  theme_minimal() +
+  xlab("Genes") +
+  ylab("Log2 Fold Change")
+ggsave("figures/bar_plot.png")
+plot(top_genes$logFC, -log10(top_genes$adj.P.Val), pch = 20, 
+     xlab = "Log2 Fold Change", ylab = "-Log10 Adjusted P-value")
