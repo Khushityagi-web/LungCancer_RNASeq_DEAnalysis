@@ -1,50 +1,202 @@
-## Differential Gene Expression (DGE) Analysis: Tumor vs. Normal
-# Objective
-The objective of this project is to identify the differentially expressed genes (DEGs) between tumor and normal samples and conduct downstream analysis, including visualization, functional enrichment, and network analysis. The project aims to understand which genes show significant expression changes between the two groups and their potential biological significance in cancer-related pathways.
-# Project Overview
-This project uses RNA-Seq data to perform differential expression analysis and subsequent functional enrichment of the DEGs. We employ tools and packages such as limma, ggplot2, clusterProfiler, and Cytoscape to perform the analysis and visualize the results.
-# Steps in the Analysis:
-Steps in the Analysis:
-Data Preprocessing: Filter out low-expression genes and normalize the data.
+Differential Gene Expression Analysis: Lung Cancer (Tumor vs Normal)
 
-Differential Expression Analysis: Using limma to identify DEGs between tumor and normal samples.
+This repository contains an end-to-end differential gene expression (DGE) analysis comparing tumor vs. normal lung tissue samples.
+The analysis identifies significantly altered genes, explores biological pathways, and constructs gene–gene interaction networks to highlight potential mechanisms involved in cancer progression.
 
-Visualization:
+## 🎯 Objective
+
+To identify differentially expressed genes (DEGs) between tumor and normal samples and perform downstream analyses, including:
+
+statistical modeling
+
+visualization
+
+functional enrichment (GO/KEGG)
+
+network analysis (STRING + Cytoscape)
+
+The goal is to understand which genes change significantly and what biological pathways they may influence.
+
+## 🧬 Project Overview
+
+This project uses RNA-Seq gene expression data and applies:
+
+limma for differential expression
+
+ggplot2 for visualization
+
+clusterProfiler for GO/KEGG enrichment
+
+STRING + Cytoscape for network analysis
+
+The workflow moves from raw expression matrices → DEGs → pathway-level insights → network interactions.
+
+## 📁 Repository Structure
+LungCancer_RNASeq_DEAnalysis/
+│
+├── 01_data/
+│   ├── DEGs.csv
+│   ├── significant_genes.csv
+│   ├── DEG_list_for_STRING.csv
+│
+├── 02_scripts/
+│   ├── 01_data_loading.R
+│   ├── 02_data_preprocessing.R
+│   ├── 03_differential_expression_analysis.R
+│   ├── 04_gene_enrichment_analysis.R
+│   ├── 05_network_analysis.R
+│
+├── 03_results/
+│   ├── visualizations.pdf
+│
+└── README.md
+
+
+This structure reflects the chronological steps of the computational workflow.
+
+## 🔬 Steps in the Analysis
+1️⃣ Data Loading & Inspection
+
+Script: 01_data_loading.R
+
+Imports the RNA-Seq dataset (GEO)
+
+Performs initial QC
+
+Checks sample annotations
+
+2️⃣ Data Preprocessing
+
+Script: 02_data_preprocessing.R
+
+Filters low-expression genes
+
+Normalizes expression values
+
+Maps gene identifiers (annotation)
+
+Preprocessing ensures statistical reliability for limma modeling.
+
+3️⃣ Differential Expression Analysis (limma)
+
+Script: 03_differential_expression_analysis.R
+
+Builds design matrix (Tumor vs Normal)
+
+Fits linear model using limma
+
+Computes log2 fold changes
+
+Adjusts p-values with Benjamini–Hochberg
+
+Exports:
+
+DEGs.csv
+
+significant_genes.csv (padj < 0.05)
+
+Visualizations included:
 
 Volcano plot
 
-Bar plot
+Bar plot of top genes
 
-Scatter plot
+Scatter plot of expression trends
 
-Functional Enrichment Analysis: Perform GO and KEGG enrichment using clusterProfiler.
+(All stored in 03_results/visualizations.pdf)
 
-Network Analysis: Identify key gene-gene interactions using Cytoscape and STRING database.
-# Data Description
-The data used in this analysis consists of RNA-Seq expression levels of genes across tumor and normal samples. The data was processed to obtain log2 fold changes and adjusted p-values for each gene. The significant DEGs (adjusted p-value < 0.05) were further analyzed for functional enrichment and gene-gene interactions.
-# Code Files
-data_loading.R: Script for importing and inspecting the GEO dataset.
+4️⃣ Functional Enrichment Analysis
 
-data_preprocessing.R: Script for preprocessing microarray data, including normalization and annotation.
+Script: 04_gene_enrichment_analysis.R
 
-differential_expression_analysis.R: Performs differential expression analysis using limma.
+Using clusterProfiler, the analysis includes:
 
-gene_enrichment_analysis.R: Conducts GO/KEGG enrichment using clusterProfiler.
+GO Biological Process enrichment
 
-network_analysis.R: Prepares input for STRING and Cytoscape to analyze DEG networks.
-# Key Files
-DEGs.csv: A list of differentially expressed genes (DEGs) between tumor and normal samples.
+KEGG pathway enrichment
 
-significant_genes.csv: Exported list of significant DEGs (adjusted p-value < 0.05).
+Visualization (dotplots, barplots)
 
-DEG_list_for_STRING.csv: List of DEGs with log2 fold change values for network analysis.
+Key pathways enriched include:
 
-visualizations: Folder containing the generated plots.
-# Conclusion
-This analysis identifies key genes that are differentially expressed between tumor and normal samples and provides insights into the biological processes these genes are involved in. Functional enrichment analysis points to significant pathways related to cytoskeleton regulation, immune response, and glial differentiation, which may have implications in cancer research.
-# References
-Limma Package Documentation: https://bioconductor.org/packages/release/bioc/html/limma.html
+cytoskeleton organization
 
-ClusterProfiler Documentation: https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html
+immune-related processes
 
-Cytoscape: https://cytoscape.org/
+glial differentiation
+
+These highlight potential mechanisms influencing lung cancer biology.
+
+5️⃣ Network Analysis (STRING + Cytoscape)
+
+Script: 05_network_analysis.R
+
+Prepares DEG list with log2FC values
+
+Creates DEG_list_for_STRING.csv
+
+Used in STRING to retrieve protein–protein interactions
+
+Can be imported into Cytoscape for network visualization
+
+Network analysis helps reveal central hub genes and interaction modules.
+
+## 📊 Data Description
+
+The dataset contains RNA-Seq gene expression values for tumor and normal lung tissue samples.
+
+For each gene:
+
+log2 fold change
+
+p-value
+
+adjusted p-value (FDR)
+
+Significant DEGs (padj < 0.05) are used for enrichment and network analysis.
+
+## 📌 Key Files
+File	Description
+DEGs.csv	Full list of DEGs (tumor vs normal)
+significant_genes.csv	DEGs with adjusted p-value < 0.05
+DEG_list_for_STRING.csv	Input for STRING/Cytoscape
+visualizations.pdf	Volcano, bar plot, scatter plot
+## 🧰 Tools & Packages Used
+R Packages
+
+limma
+
+ggplot2
+
+clusterProfiler
+
+org.Hs.eg.db
+
+enrichplot
+
+Network Tools
+
+STRING Database
+
+Cytoscape
+
+## 🧠 Conclusion
+
+This analysis identifies key genes that differ between tumor and normal samples and links them to biological pathways relevant to cancer progression.
+Enrichment results suggest involvement in:
+
+cytoskeleton regulation
+
+immune system activation
+
+differentiation-related pathways
+
+These findings may serve as a starting point for deeper biological investigation.
+
+## 📚 References
+
+limma documentation
+
+clusterProfiler manual
+
+Cytoscape
