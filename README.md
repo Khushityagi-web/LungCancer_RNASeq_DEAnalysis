@@ -1,4 +1,4 @@
-Differential Gene Expression Analysis: Lung Cancer (Tumor vs Normal)
+# Differential Gene Expression Analysis: Lung Cancer (Tumor vs Normal)
 
 This repository contains an end-to-end differential gene expression (DGE) analysis comparing tumor vs. normal lung tissue samples.
 The analysis identifies significantly altered genes, explores biological pathways, and constructs gene–gene interaction networks to highlight potential mechanisms involved in cancer progression.
@@ -50,7 +50,6 @@ LungCancer_RNASeq_DEAnalysis/
 │   ├── visualizations.pdf
 │
 └── README.md
-
 
 This structure reflects the chronological steps of the computational workflow.
 
